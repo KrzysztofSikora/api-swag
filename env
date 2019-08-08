@@ -1,0 +1,7 @@
+API_HOST='http://localhost:8888/api'
+APP_ENV=development
+
+MYSQL_HOST=localhost
+MYSQL_DATABASE=yii2basic
+MYSQL_USER=root
+MYSQL_PASSWORD=cr2032
