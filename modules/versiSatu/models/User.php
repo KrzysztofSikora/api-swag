@@ -21,7 +21,7 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
- * @property Todo $todo
+ * @property Todo[] $todo
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -227,7 +227,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getTodo()
     {
-        return $this->hasOne(ToDo::className(), ['user_id' => 'id']);
+        return $this->hasMany(ToDo::className(), ['user_id' => 'id']);
     }
 
 }
