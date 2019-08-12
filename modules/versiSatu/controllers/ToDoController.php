@@ -14,7 +14,7 @@ class ToDoController extends Controller
     public function behaviors() {
         $behaviors = parent::behaviors();
 
-//        unset($behaviors['authenticator']);
+        unset($behaviors['authenticator']);
         $behaviors['corsFilter'] = [
             'class' => \yii\filters\Cors::className(),
             'cors' => [
@@ -153,6 +153,7 @@ class ToDoController extends Controller
      *     path="/v1/todo",
      *     summary="Create todo item",
      *     tags={"ToDo"},
+     *
      *     @SWG\Parameter(
      *         name="body",
      *         in="body",
@@ -189,6 +190,77 @@ class ToDoController extends Controller
         }
 
     }
+
+    /**
+     * @SWG\Post(
+     *     path="/v1/todo/{id}",
+     *     summary="Create todo item for user",
+     *     tags={"ToDo"},
+     *      @SWG\Parameter(
+     *         ref="#/parameters/id"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="body",
+     *         in="body",
+     *         description="Create new ToDo item",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/ToDo"),
+     *     ),
+     *     @SWG\Response(
+     *         response=201,
+     *         description="Data news",
+     *         @SWG\Schema(ref="#/definitions/CreateToDo")
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="ValidateErrorException",
+     *         @SWG\Schema(ref="#/definitions/ErrorValidate")
+     *     )
+     * )
+     *
+     * @return array
+     */
+    public function actionCreateForUser($id): array
+    {
+        $dataRequest['ToDo'] = Yii::$app->request->post();
+        $model = new ToDo();
+        if($model->load($dataRequest)) {
+            //@todo should be enum
+            $model->user_id = $id;
+            $model->priority = 'ttt';
+            $model->done = 0;
+            $model->created_at = date("Y-m-d H:i:s");
+            $model->updated_at = date("Y-m-d H:i:s");
+            $model->save();
+            return $this->apiCreated($model);
+        }
+
+    }
+
+        /**
+         * @SWG\Get(
+         *   path="/v1/todo/all",
+         *   summary="Get all todos",
+         *   tags={"ToDo"},
+         *
+         *   @SWG\Response(
+         *     response=200,
+         *     description="Detail Information ToDo App",
+         *     @SWG\Schema(ref="#/definitions/About")
+         *   ),
+         *  @SWG\Response(
+         *        response=401,
+         *        description="Unauthorized",
+         *        @SWG\Schema(ref="#/definitions/Unauthorized")
+         *     )
+         * )
+         */
+
+        public function actionGetAllForUser()
+        {
+            $toDos =  ToDo::findOne('151');
+            return $this->apiCollection($toDos->user);
+        }
     /**
      * @SWG\Delete(
      *     path="/v1/todo/{id}",

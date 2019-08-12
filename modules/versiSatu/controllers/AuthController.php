@@ -26,6 +26,8 @@ class AuthController extends Controller
      * )
      */
 
+
+    //@todo mapper for all records
     public function actionMe()
     {
         $user = Yii::$app->user->identity;
@@ -33,6 +35,6 @@ class AuthController extends Controller
         /* remove token */
         unset($user['token']);
 
-        return $this->apiItem($user);
+        return $this->apiItem($user->todo);
     }
 }

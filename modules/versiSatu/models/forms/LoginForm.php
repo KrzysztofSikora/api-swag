@@ -11,6 +11,7 @@ use app\modules\versiSatu\models\User;
  *   definition="LoginForm",
  *   type="object",
  *   required={"username", "email", "token", "updated_at", "created_at"},
+ *   @SWG\Property(property="id", type="integer"),
  *   @SWG\Property(property="name", type="string"),
  *   @SWG\Property(property="username", type="string"),
  *   @SWG\Property(property="token", type="string"),
@@ -22,7 +23,7 @@ use app\modules\versiSatu\models\User;
  * @SWG\Definition(
  *   definition="CurrentUser",
  *   type="object",
- *   required={"username", "email", "token", "updated_at", "created_at"},
+ *   required={"id", "username", "email", "token", "updated_at", "created_at"},
  *   allOf={
  *     @SWG\Schema(ref="#/definitions/LoginForm")
  *   }

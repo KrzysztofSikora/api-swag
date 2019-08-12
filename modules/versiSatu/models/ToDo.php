@@ -39,6 +39,9 @@ use Yii;
  * @property string $priority
  * @property string $created_at
  * @property string $updated_at
+ * @property int $user_id
+ * @property User $user
+
  */
 class ToDo extends \yii\db\ActiveRecord
 {
@@ -56,7 +59,7 @@ class ToDo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['done'], 'integer'],
+            [['done', 'user_id'], 'integer'],
             [['content', 'priority'], 'string'],
             [['created_at'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
@@ -72,11 +75,18 @@ class ToDo extends \yii\db\ActiveRecord
             'id' => 'ID',
             'done' => 'Done',
             'priority' => 'Priority',
+            'user_id' => 'User_Id',
             'content' => 'Content',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
     }
 
-
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasMany(User::className(), ['id' => 'user_id']);
+    }
 }
