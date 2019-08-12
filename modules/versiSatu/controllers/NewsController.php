@@ -3,7 +3,7 @@
 namespace app\modules\versiSatu\controllers;
 
 use app\components\Controller;
-use app\models\News;
+use app\modules\versiSatu\models\News;
 use yii\web\NotFoundHttpException;
 use Yii;
 

@@ -79,7 +79,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\modules\versiSatu\models\User',
             'enableAutoLogin' => false,
             'enableSession' => false,
         ],

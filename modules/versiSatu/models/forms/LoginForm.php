@@ -1,10 +1,10 @@
 <?php
 
-namespace app\models\forms;
+namespace app\modules\versiSatu\models\forms;
 
 use Yii;
 use yii\base\Model;
-use app\models\User;
+use app\modules\versiSatu\models\User;
 
 /**
  * @SWG\Definition(

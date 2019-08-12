@@ -3,8 +3,8 @@
 namespace app\modules\versiSatu\controllers;
 
 use app\components\Controller;
-use app\models\Messages;
-use app\models\ToDo;
+use app\modules\versiSatu\models\Messages;
+use app\modules\versiSatu\models\ToDo;
 use yii\filters\AccessControl;
 use Yii;
 use yii\filters\auth\HttpBearerAuth;

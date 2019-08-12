@@ -3,10 +3,10 @@
 namespace app\modules\versiSatu\controllers;
 
 use app\components\Controller;
-use app\models\forms\RegisterForm;
+use app\modules\versiSatu\models\forms\RegisterForm;
 use yii\filters\AccessControl;
-use app\models\forms\LoginForm;
-use app\models\User;
+use app\modules\versiSatu\models\forms\LoginForm;
+use app\modules\versiSatu\models\User;
 use Yii;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;

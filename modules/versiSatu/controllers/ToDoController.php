@@ -3,7 +3,7 @@
 namespace app\modules\versiSatu\controllers;
 
 use app\components\Controller;
-use app\models\ToDo;
+use app\modules\versiSatu\models\ToDo;
 use yii\filters\AccessControl;
 use Yii;
 use yii\filters\auth\HttpBearerAuth;
@@ -14,7 +14,7 @@ class ToDoController extends Controller
     public function behaviors() {
         $behaviors = parent::behaviors();
 
-        unset($behaviors['authenticator']);
+//        unset($behaviors['authenticator']);
         $behaviors['corsFilter'] = [
             'class' => \yii\filters\Cors::className(),
             'cors' => [
