@@ -5,8 +5,8 @@ return [
     'GET todo' => 'to-do/index',
     'OPTIONS todo' => 'to-do/index',
 
-    'GET todo/all' => 'to-do/get-all-for-user',
-    'OPTIONS todo/all' => 'to-do/get-all-for-user',
+    'GET todo/all' => 'to-do/get-all-current-user',
+    'OPTIONS todo/all' => 'to-do/get-current-user',
 
     'GET todo/{id}' => 'to-do/get-one',
     'OPTIONS todo/{id}' => 'to-do/get-one',
@@ -17,9 +17,6 @@ return [
     'POST todo' => 'to-do/create',
     'OPTIONS todo' => 'to-do/create',
 
-
-    'POST todo/{id}' => 'to-do/create-for-user',
-    'OPTIONS todo/{id}' => 'to-do/create-for-user',
 
 
     'DELETE todo/{id}' => 'to-do/delete',
