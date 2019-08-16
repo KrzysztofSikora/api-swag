@@ -4,19 +4,10 @@ namespace app\modules\versiSatu\controllers;
 
 use app\components\Controller;
 use app\modules\versiSatu\models\forms\RegisterForm;
-use yii\filters\AccessControl;
 use app\modules\versiSatu\models\forms\LoginForm;
 use app\modules\versiSatu\models\User;
 use Yii;
-use yii\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\HttpBearerAuth;
-use yii\filters\auth\QueryParamAuth;
-use yii\filters\ContentNegotiator;
-use yii\filters\Cors;
-use yii\rest\ActiveController;
-use yii\helpers\ArrayHelper;
-use yii\web\Response;
 
 class GuestController extends Controller
 {
@@ -205,7 +196,6 @@ class GuestController extends Controller
                 return $this->apiCreated($user);
             }
         }
-
         return $this->apiValidate($model->errors);
     }
 }

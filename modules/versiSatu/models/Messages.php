@@ -4,17 +4,6 @@ namespace app\modules\versiSatu\models;
 
 use Yii;
 
-
-
-
-
-
-
-
-
-
-
-
 /**
  * @SWG\Definition(
  *   definition="Messages",

@@ -48,13 +48,13 @@ class RegisterForm extends Model
             ['name', 'string', 'max' => 100],
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\app\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\app\modules\versiSatu\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\app\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\app\modules\versiSatu\models\User', 'message' => 'This email address has already been taken.'],
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
         ];
@@ -67,6 +67,8 @@ class RegisterForm extends Model
      */
     public function register()
     {
+
+
         if (!$this->validate()) {
             return null;
         }
@@ -77,7 +79,8 @@ class RegisterForm extends Model
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
-
+//        var_dump($this->validate());
+//        die();
         return $user->save() ? $user : null;
     }
 }

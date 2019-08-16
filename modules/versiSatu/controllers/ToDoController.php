@@ -27,8 +27,10 @@ class ToDoController extends Controller
     public function behaviors() {
         $behaviors = parent::behaviors();
 
-        unset($behaviors['authenticator']);
-        $behaviors['corsFilter'] = [
+
+       unset($behaviors['authenticator']);
+
+       $behaviors['corsFilter'] = [
             'class' => \yii\filters\Cors::className(),
             'cors' => [
                 'Origin' => ['http://192.168.0.108','http://localhost:3000','*'],
@@ -38,6 +40,11 @@ class ToDoController extends Controller
                 'Access-Control-Max-Age' => 86400,
                 'Access-Control-Expose-Headers' => ['X-Pagination-Current-Page'],
             ],
+        ];
+
+        $behaviors['authenticator'] = [
+            'class' =>  HttpBearerAuth::className(),
+            'except' => ['options'],
         ];
 
         return $behaviors ;
@@ -79,8 +86,10 @@ class ToDoController extends Controller
      */
     public function actionIndex()
     {
+        $user = Yii::$app->user->identity;
         $toDos = ToDo::find()
             ->orderBy('id')
+            ->where(['user_id' => $user->getId()])
             ->all();
         return $this->apiCollection($toDos);
     }
@@ -196,6 +205,7 @@ class ToDoController extends Controller
 
         $model = new ToDo();
         if($model->load($dataRequest)) {
+
             //@todo should be enum
             $model->user_id = $user->getId();
             $model->priority = 'low';
