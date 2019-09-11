@@ -159,11 +159,6 @@ class ToDoController extends Controller
         $dataRequest['ToDo'] = Yii::$app->request->post();
         $model = $this->toDoService->findModel($id);
         if($model->load($dataRequest)) {
-            if($model->done == true) {
-                $model->done = 1;
-                } else {
-                $model->done = 0;
-            }
             $model->updated_at = date("Y-m-d H:i:s");
             $model->save();
             return $this->apiUpdated($model);
