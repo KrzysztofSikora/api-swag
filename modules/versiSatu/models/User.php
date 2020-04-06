@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\modules\versiSatu\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -21,6 +21,7 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ * @property Todo[] $todo
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -73,7 +74,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function fields()
     {
-        return ['name', 'username', 'email', 'token', 'updated_at', 'created_at'];
+        return ['id','name', 'username', 'email', 'token', 'updated_at', 'created_at'];
     }
 
     /**
@@ -220,4 +221,13 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTodo()
+    {
+        return $this->hasMany(ToDo::className(), ['user_id' => 'id']);
+    }
+
 }

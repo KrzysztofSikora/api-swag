@@ -1,19 +1,8 @@
 <?php
 
-namespace app\models;
+namespace app\modules\versiSatu\models;
 
 use Yii;
-
-
-
-
-
-
-
-
-
-
-
 
 /**
  * @SWG\Definition(

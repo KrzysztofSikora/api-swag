@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\modules\versiSatu\models;
 
 use yii\db\ActiveRecord;
 

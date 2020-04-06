@@ -3,8 +3,8 @@
 namespace app\modules\versiSatu\controllers;
 
 use app\components\Controller;
-use app\models\Messages;
-use app\models\ToDo;
+use app\modules\versiSatu\models\Messages;
+use app\modules\versiSatu\models\ToDo;
 use yii\filters\AccessControl;
 use Yii;
 use yii\filters\auth\HttpBearerAuth;
@@ -46,6 +46,25 @@ class MessagesController extends Controller
      *   }
      * )
      */
+
+    /**
+     * @SWG\Get(
+     *   path="/v1/messages",
+     *   summary="messages app",
+     *   tags={"Messages"},
+     *   @SWG\Response(
+     *     response=200,
+     *     description="Detail Information ToDo App",
+     *     @SWG\Schema(ref="#/definitions/About")
+     *   ),
+     *  @SWG\Response(
+     *        response=401,
+     *        description="Unauthorized",
+     *        @SWG\Schema(ref="#/definitions/Unauthorized")
+     *     )
+     * )
+     */
+
     public function actionIndex()
     {
         $toDos = Messages::find()
@@ -53,6 +72,28 @@ class MessagesController extends Controller
             ->all();
         return $this->apiCollection($toDos);
     }
+
+
+    /**
+     * @SWG\Get(
+     *   path="/v1/messages/{id}",
+     *   summary="get one messages item",
+     *   tags={"Messages"},
+     *   @SWG\Parameter(
+     *        ref="#/parameters/id"
+     *   ),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="Detail Information messages App",
+     *     @SWG\Schema(ref="#/definitions/About")
+     *   ),
+     *  @SWG\Response(
+     *        response=401,
+     *        description="Unauthorized",
+     *        @SWG\Schema(ref="#/definitions/Unauthorized")
+     *     )
+     * )
+     */
 
     public function actionGetOne(string $id)
     {
@@ -62,6 +103,32 @@ class MessagesController extends Controller
 
 
     /**
+     * @SWG\Put(
+     *     path="/v1/messages/{id}",
+     *     summary="messages app update",
+     *     tags={"Messages"},
+     *     @SWG\Parameter(
+     *         ref="#/parameters/id"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="body",
+     *         in="body",
+     *         description="Create new messages item",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/ToDo"),
+     *     ),
+     *     @SWG\Response(
+     *         response=202,
+     *         description="Messages"
+     *
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="ValidateErrorException",
+     *         @SWG\Schema(ref="#/definitions/ErrorValidate")
+     *     )
+     * )
+     *
      * @param string $id
      * @return array
      * @throws NotFoundHttpException
@@ -85,6 +152,29 @@ class MessagesController extends Controller
     }
 
     /**
+     * @SWG\Post(
+     *     path="/v1/messages",
+     *     summary="Create messages item",
+     *     tags={"Messages"},
+     *     @SWG\Parameter(
+     *         name="body",
+     *         in="body",
+     *         description="Create new Messages item",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/Messages"),
+     *     ),
+     *     @SWG\Response(
+     *         response=201,
+     *         description="Data news",
+     *         @SWG\Schema(ref="#/definitions/CreateMessages")
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="ValidateErrorException",
+     *         @SWG\Schema(ref="#/definitions/ErrorValidate")
+     *     )
+     * )
+     *
      * @return array
      */
     public function actionCreate(): array
@@ -102,8 +192,24 @@ class MessagesController extends Controller
         }
 
     }
-
     /**
+     * @SWG\Delete(
+     *     path="/v1/messages/{id}",
+     *     summary="Delete messages item",
+     *     tags={"Messages"},
+     *     @SWG\Parameter(
+     *         ref="#/parameters/id"
+     *     ),
+     *     @SWG\Response(
+     *         response=202,
+     *         description="Status Delete",
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="Resource not found",
+     *         @SWG\Schema(ref="#/definitions/Not Found")
+     *     )
+     * )
      * @param string $id
      * @return array
      * @throws NotFoundHttpException
@@ -117,8 +223,22 @@ class MessagesController extends Controller
         }
         return $this->apiDeleted(false);
     }
-
     /**
+     * @SWG\Delete(
+     *     path="/v1/messages/delete-all",
+     *     summary="Delete messages all items",
+     *     tags={"Messages"},
+     *     @SWG\Response(
+     *         response=202,
+     *         description="Status Delete",
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="Resource not found",
+     *         @SWG\Schema(ref="#/definitions/Not Found")
+     *     )
+     * )
+     *
      * @return array
      */
     public function actionDeleteAll(): array
